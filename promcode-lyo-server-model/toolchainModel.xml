@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oslc4j_tc:Toolchain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface" xmlns:oslc4j_tc="http://org.eclipse.lyo/oslc4j/toolChain">
+  <adaptorInterfaces name="PROMCODE Server">
+    <serviceProviderCatalog title="Service Provider Catalog" description="Service Provider Catalog">
+      <serviceProviders title="Service Provider" description="Service Provider">
+        <services>
+          <domainSpecification href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#//@domainSpecifications[name='PROMCODE']"/>
+          <creationFactories title="CreationFactory1" label="CreationFactory1" creationURI="create">
+            <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_rx6HgVQEEe6sU62TIv0TVA"/>
+          </creationFactories>
+          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="750" hintHeight="750">
+            <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_rx6HgVQEEe6sU62TIv0TVA"/>
+          </selectionDialogs>
+          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+        </services>
+        <services>
+          <domainSpecification href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#//@domainSpecifications[name='PROMCODE']"/>
+          <creationFactories title="CreationFactory1" label="CreationFactory1" creationURI="create">
+            <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_9ZqL51QFEe6sU62TIv0TVA"/>
+          </creationFactories>
+          <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="750" hintHeight="750">
+            <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_9ZqL51QFEe6sU62TIv0TVA"/>
+          </selectionDialogs>
+          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+        </services>
+      </serviceProviders>
+    </serviceProviderCatalog>
+    <webServices name="ArtifactService" serviceUrlPattern="artifact" resourceUrlPattern="{id}">
+      <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_rx6HgVQEEe6sU62TIv0TVA"/>
+      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+    </webServices>
+    <webServices name="ProjectService" serviceUrlPattern="project" resourceUrlPattern="{id}">
+      <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_9ZqL51QFEe6sU62TIv0TVA"/>
+      <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+    </webServices>
+    <specification/>
+    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8080/" applicationContextPath="/promcode-server" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8080">
+      <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="." javaBasePackageName="org.oasis.oslc.promcode.server"/>
+      <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="6.0.0-SNAPSHOT" groupId="org.oasis.oslc.promcode.server" artifactId="promcode-server" version="0.0.1-SNAPSHOT"/>
+    </configuration>
+    <stores defaultNamedGraph="urn:x-arq:DefaultGraph" sparqlQueryEndpoint="http://localhost:3030/dataset/sparql" sparqlUpdateEndpoint="http://localhost:3030/dataset/update" initialPoolSize="500"/>
+  </adaptorInterfaces>
+  <specification/>
+  <vocabularies/>
+</oslc4j_tc:Toolchain>
