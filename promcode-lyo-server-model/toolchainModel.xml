@@ -11,7 +11,7 @@
           <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="750" hintHeight="750">
             <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_rx6HgVQEEe6sU62TIv0TVA"/>
           </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+          <persistence store="//@adaptorInterfaces.0/@stores.0" creationFactory="true"/>
         </services>
         <services>
           <domainSpecification href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#//@domainSpecifications[name='PROMCODE']"/>
@@ -21,7 +21,7 @@
           <selectionDialogs title="SelectionDialog1" label="SelectionDialog1" dialogURI="selector" hintWidth="750" hintHeight="750">
             <resourceTypes href="../org.eclipse.lyo.tools.domainmodels/oslcDomainSpecifications.xml#_9ZqL51QFEe6sU62TIv0TVA"/>
           </selectionDialogs>
-          <persistence store="//@adaptorInterfaces.0/@stores.0"/>
+          <persistence store="//@adaptorInterfaces.0/@stores.0" creationFactory="true"/>
         </services>
       </serviceProviders>
     </serviceProviderCatalog>

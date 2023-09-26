@@ -59,6 +59,24 @@ public class RestDelegate {
     
     @Inject ResourcesFactory resourcesFactory;
     // Start of user code class_attributes
+    private static int scopeItemId = 1;
+    private static int workItemId = 1;
+    private static int artifactId = 1;
+    private static int issueId = 1;
+    private static int riskId = 1;
+    private static int measureId = 1;
+    private static int measurementId = 1;
+    private static int projectId = 1;
+    private static int planId = 1;
+    private static int reportId = 1;
+    private static int issueCollectionId = 1;
+    private static int riskCollectionId = 1;
+
+    private static ServiceProviderInfo sp = new ServiceProviderInfo();
+    static {
+        sp.name = "PROMCODE Service Provider";
+        sp.serviceProviderId = "1";
+    }
     // End of user code
     
     public RestDelegate() {
@@ -78,10 +96,8 @@ public class RestDelegate {
         ServiceProviderInfo[] serviceProviderInfos = {};
         
         // Start of user code "ServiceProviderInfo[] getServiceProviderInfos(...)"
-        ServiceProviderInfo sp = new ServiceProviderInfo();
-        sp.name = "PROMCODE Service Provider";
-        sp.serviceProviderId = "1";
         serviceProviderInfos = new ServiceProviderInfo[] {sp};
+        // End of user code
         return serviceProviderInfos;
     }
 
@@ -114,6 +130,33 @@ public class RestDelegate {
     {
         Artifact newResource = null;
         
+        // Start of user code createArtifact_storeInit
+        // End of user code
+        Store store = storePool.getStore();
+        try {
+            URI uri = null;
+            // Start of user code createArtifact_storeSetUri
+            String id = Integer.toString(artifactId++);
+            uri = resourcesFactory.constructURIForArtifact(id /* aResource.getIdentifier() */);
+            aResource.setIdentifier(id);
+            // End of user code
+            if (store.resourceExists(storePool.getDefaultNamedGraphUri(), uri)) {
+                log.error("Cannot create a resource that already exists: '" + uri + "'");
+                throw new WebApplicationException("Cannot create a resource that already exists: '" + uri + "'", Status.SEE_OTHER);
+            }
+            aResource.setAbout(uri);
+            try {
+                store.appendResource(storePool.getDefaultNamedGraphUri(), aResource);
+            } catch (StoreAccessException e) {
+                log.error("Failed to create resource: '" + aResource.getAbout() + "'", e);            
+                throw new WebApplicationException("Failed to create resource: '" + aResource.getAbout() + "'", e, Status.INTERNAL_SERVER_ERROR);
+            }
+        } finally {
+            storePool.releaseStore(store);
+        }
+        newResource = aResource;
+        // Start of user code createArtifact_storeFinalize
+        // End of user code
         
         // Start of user code createArtifact
         // TODO Implement code to create a resource
@@ -153,6 +196,33 @@ public class RestDelegate {
     {
         Project newResource = null;
         
+        // Start of user code createProject_storeInit
+        // End of user code
+        Store store = storePool.getStore();
+        try {
+            URI uri = null;
+            // Start of user code createProject_storeSetUri
+            String id = Integer.toString(projectId++);
+            uri = resourcesFactory.constructURIForProject(id /* aResource.getIdentifier() */);
+            aResource.setIdentifier(id);
+            // End of user code
+            if (store.resourceExists(storePool.getDefaultNamedGraphUri(), uri)) {
+                log.error("Cannot create a resource that already exists: '" + uri + "'");
+                throw new WebApplicationException("Cannot create a resource that already exists: '" + uri + "'", Status.SEE_OTHER);
+            }
+            aResource.setAbout(uri);
+            try {
+                store.appendResource(storePool.getDefaultNamedGraphUri(), aResource);
+            } catch (StoreAccessException e) {
+                log.error("Failed to create resource: '" + aResource.getAbout() + "'", e);            
+                throw new WebApplicationException("Failed to create resource: '" + aResource.getAbout() + "'", e, Status.INTERNAL_SERVER_ERROR);
+            }
+        } finally {
+            storePool.releaseStore(store);
+        }
+        newResource = aResource;
+        // Start of user code createProject_storeFinalize
+        // End of user code
         
         // Start of user code createProject
         // TODO Implement code to create a resource
