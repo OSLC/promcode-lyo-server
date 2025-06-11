@@ -71,17 +71,36 @@ You can add resources to the server by performing resource operations on their c
 
 This can be done through the built-in Swagger editor, or using the command line. 
 
-1. create a file named artifact1.ttl
-``` 
-@prefix dcterms: <http://purl.org/dc/terms/> .
+**Bash/Linux/macOS:**
+```bash
+curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix oslc_promcode: <http://open-services.net/ns/promcode#> .
-<>  a oslc_promcode:Artifact ;  
-dcterms:identifier "1" ;  
-dcterms:title "A1" ;  
-dcterms:description "UI for making a reservation" .
-``` 
-2. `curl -d @artifact1.ttl -H "Accept: text/turtle;" -H "Content-type: text/turtle" http://localhost:8080/promcode-server/oslc/service1/artifacts/create`
-3. `curl -H "Accept: text/turtle;" http://localhost:8080/promcode-server/oslc/artifact/1`
+<> a oslc_promcode:Artifact ;
+   dcterms:identifier "1" ;
+   dcterms:title "A1" ;
+   dcterms:description "UI for making a reservation" .' \
+-H "Accept: text/turtle;" \
+-H "Content-type: text/turtle" \
+http://localhost:8080/promcode-server/oslc/service1/artifacts/create
+```
+
+**PowerShell/Windows:**
+```powershell
+curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix oslc_promcode: <http://open-services.net/ns/promcode#> .
+<> a oslc_promcode:Artifact ;
+   dcterms:identifier "1" ;
+   dcterms:title "A1" ;
+   dcterms:description "UI for making a reservation" .' `
+-H "Accept: text/turtle;" `
+-H "Content-type: text/turtle" `
+http://localhost:8080/promcode-server/oslc/service1/artifacts/create
+```
+
+2. To retrieve the created artifact:
+   ```bash
+   curl -H "Accept: text/turtle;" http://localhost:8080/promcode-server/oslc/artifact/1
+   ```
 
 
 # Modifying the OSLC PROMCODE server with Lyo Designer
