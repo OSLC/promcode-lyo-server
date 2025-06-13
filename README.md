@@ -15,7 +15,29 @@ Follow the 3 sections below to:
 
 You will set up an RDF data store to store the OSLC PROMCODE resources. 
 
-We will utilize the Apache Jena Fuseki that is an open source RDF server. You can select either Docker version or Java version.
+We will utilize the Apache Jena Fuseki that is an open source RDF server. You can select either Docker Compose, Docker version, or Java version.
+
+### Docker Compose (Recommended)
+The easiest way to run both the PROMCODE server and Fuseki together:
+
+1. Make sure you have Docker and Docker Compose installed
+2. Run the following command from the repository root:
+   ```bash
+   docker-compose up --build
+   ```
+3. This will start both services:
+   - Fuseki server at http://localhost:3030 (admin/admin)
+   - PROMCODE server at http://localhost:8080/promcode-server
+
+To stop the services:
+```bash
+docker-compose down
+```
+
+To view logs:
+```bash
+docker-compose logs -f
+```
 
 ### Docker version
 1. Download docker version of fuseki server from https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-docker/4.2.0/
@@ -56,6 +78,21 @@ cd promcode-lyo-server
 mvn clean cargo:run
 ```
 
+### Using Docker Compose
+
+If you prefer to use Docker, you can run both the PROMCODE server and Fuseki using Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+This will:
+- Build the PROMCODE server Docker image
+- Start Fuseki server on port 3030
+- Start PROMCODE server on port 8080
+- Create a Docker network for service communication
+- Persist Fuseki data in a Docker volume
+
 ## Navigate to OSLC server
 
 The OSLC server is available at the following URL:
@@ -71,17 +108,36 @@ You can add resources to the server by performing resource operations on their c
 
 This can be done through the built-in Swagger editor, or using the command line. 
 
-1. create a file named artifact1.ttl
-``` 
-@prefix dcterms: <http://purl.org/dc/terms/> .
+**Bash/Linux/macOS:**
+```bash
+curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix oslc_promcode: <http://open-services.net/ns/promcode#> .
-<>  a oslc_promcode:Artifact ;  
-dcterms:identifier "1" ;  
-dcterms:title "A1" ;  
-dcterms:description "UI for making a reservation" .
-``` 
-2. `curl -d @artifact1.ttl -H "Accept: text/turtle;" -H "Content-type: text/turtle" http://localhost:8080/promcode-server/oslc/service1/artifacts/create`
-3. `curl -H "Accept: text/turtle;" http://localhost:8080/promcode-server/oslc/artifact/1`
+<> a oslc_promcode:Artifact ;
+   dcterms:identifier "1" ;
+   dcterms:title "A1" ;
+   dcterms:description "UI for making a reservation" .' \
+-H "Accept: text/turtle;" \
+-H "Content-type: text/turtle" \
+http://localhost:8080/oslc/service1/artifacts/create
+```
+
+**PowerShell/Windows:**
+```powershell
+curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix oslc_promcode: <http://open-services.net/ns/promcode#> .
+<> a oslc_promcode:Artifact ;
+   dcterms:identifier "1" ;
+   dcterms:title "A1" ;
+   dcterms:description "UI for making a reservation" .' `
+-H "Accept: text/turtle;" `
+-H "Content-type: text/turtle" `
+http://localhost:8080/oslc/service1/artifacts/create
+```
+
+2. To retrieve the created artifact:
+   ```bash
+   curl -H "Accept: text/turtle;" http://localhost:8080/oslc/artifact/1
+   ```
 
 
 # Modifying the OSLC PROMCODE server with Lyo Designer

@@ -16,9 +16,9 @@
 package org.oasis.oslc.promcode.server;
 
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.ServletContextEvent;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletContextEvent;
 import java.util.List;
 import java.util.ArrayList;
 import org.slf4j.Logger;
@@ -30,6 +30,7 @@ import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 import org.oasis.oslc.promcode.server.servlet.ServiceProviderCatalogSingleton;
 import org.oasis.oslc.promcode.server.ServiceProviderInfo;
 import org.eclipse.lyo.oslc.domains.promcode.Artifact;
+import org.eclipse.lyo.oslc.domains.promcode.ManagedItem;
 import org.eclipse.lyo.oslc.domains.promcode.Measure;
 import org.eclipse.lyo.oslc.domains.promcode.Project;
 import org.eclipse.lyo.oslc.domains.promcode.ScopeItem;
@@ -40,8 +41,8 @@ import org.eclipse.lyo.store.ModelUnmarshallingException;
 import org.eclipse.lyo.store.Store;
 import org.eclipse.lyo.store.StorePool;
 import org.eclipse.lyo.store.StoreAccessException;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response.Status;
 
 
 

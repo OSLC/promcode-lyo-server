@@ -24,10 +24,10 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.UriBuilder;
 
 import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.Service;
@@ -91,11 +91,8 @@ public class ServiceProviderCatalogSingleton
 
     public static ServiceProvider [] getServiceProviders(HttpServletRequest httpServletRequest)
     {
-        synchronized(serviceProviders)
-        {
-            initServiceProviders(httpServletRequest);
-            return serviceProviders.values().toArray(new ServiceProvider[ serviceProviders.size()]);
-        }
+        initServiceProviders(httpServletRequest);
+        return serviceProviders.values().toArray(new ServiceProvider[ serviceProviders.size()]);
     }
 
     public static boolean containsServiceProvider(final String identifier) {
@@ -213,7 +210,7 @@ public class ServiceProviderCatalogSingleton
     * creation to create unique URI paths for each ServiceProvider. 
     *
     */
-    protected static void initServiceProviders (HttpServletRequest httpServletRequest)
+    protected static synchronized void initServiceProviders (HttpServletRequest httpServletRequest)
     {
         try {
             // Start of user code initServiceProviders
