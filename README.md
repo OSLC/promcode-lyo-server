@@ -1,5 +1,8 @@
 # Introduction
 
+[![CI](https://github.com/oslc/promcode-lyo-server/actions/workflows/maven.yml/badge.svg)](https://github.com/oslc/promcode-lyo-server/actions/workflows/maven.yml)
+[![Docker](https://github.com/oslc/promcode-lyo-server/actions/workflows/docker.yml/badge.svg)](https://github.com/oslc/promcode-lyo-server/actions/workflows/docker.yml)
+
 This is a sample OSLC PROMCODE server, that is based on the [OASIS OSLC PROMCODE Specification 1.0](https://docs.oasis-open.org/oslc-promcode/promcode/v1.0/os/promcode-spec.html#).
 
 # Running the OSLC PROMCODE server
@@ -38,6 +41,20 @@ To view logs:
 ```bash
 docker-compose logs -f
 ```
+
+### Pre-built Docker Images
+
+Pre-built Docker images are available from GitHub Container Registry for both x86_64 (amd64) and ARM64 architectures:
+
+```bash
+# Run the latest version
+docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:latest
+
+# Run a specific version
+docker run -p 8080:8080 ghcr.io/YOUR_ORG/promcode-lyo-server:0.1.0
+```
+
+> **Note:** Images are automatically rebuilt weekly to ensure the latest security updates from base images.
 
 ### Docker version
 1. Download docker version of fuseki server from https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-docker/4.2.0/
