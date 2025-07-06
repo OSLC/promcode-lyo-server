@@ -17,6 +17,7 @@
 
 package org.oasis.oslc.promcode.server.servlet;
 
+// spotless:off
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -41,6 +42,7 @@ import org.oasis.oslc.promcode.server.services.ServiceProviderService2;
 
 // Start of user code imports
 // End of user code
+// spotless:on
 
 public class ServiceProvidersFactory
 {

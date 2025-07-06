@@ -17,6 +17,7 @@
 
 package org.oasis.oslc.promcode.server.services;
 
+// spotless:off
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -49,6 +50,7 @@ import org.oasis.oslc.promcode.server.servlet.ServiceProviderCatalogSingleton;
 
 // Start of user code imports
 // End of user code
+// spotless:on
 
 @OslcService(OslcConstants.OSLC_CORE_DOMAIN)
 @Path("catalog")
@@ -125,22 +127,22 @@ public class ServiceProviderCatalogService
     @Produces(MediaType.TEXT_HTML)
     public void getHtmlServiceProvider(@PathParam("someId") final String someId)
     {
-        ServiceProviderCatalog catalog = ServiceProviderCatalogSingleton.getServiceProviderCatalog(httpServletRequest);
+        try {
+            ServiceProviderCatalog catalog = ServiceProviderCatalogSingleton.getServiceProviderCatalog(httpServletRequest);
     
-        if (catalog !=null )
-        {
-            httpServletRequest.setAttribute("catalog",catalog);
-            // Start of user code getHtmlServiceProvider_setAttributes
+            if (catalog !=null ) {
+                httpServletRequest.setAttribute("catalog",catalog);
+                // Start of user code getHtmlServiceProvider_setAttributes
             // End of user code
     
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/serviceprovidercatalog.jsp");
-            try {
+                RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/serviceprovidercatalog.jsp");
                 rd.forward(httpServletRequest, httpServletResponse);
                 return;
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new WebApplicationException(e);
             }
+        } catch (WebApplicationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -17,6 +17,7 @@
 
 package org.oasis.oslc.promcode.server.services;
 
+// spotless:off
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -51,6 +52,7 @@ import org.oasis.oslc.promcode.server.servlet.Application;
 
 // Start of user code imports
 // End of user code
+// spotless:on
 
 // Start of user code pre_class_code
 // End of user code
