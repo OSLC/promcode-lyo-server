@@ -16,6 +16,7 @@
 package org.oasis.oslc.promcode.server;
 
 
+// spotless:off
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.ServletContextEvent;
@@ -48,6 +49,7 @@ import jakarta.ws.rs.core.Response.Status;
 
 // Start of user code imports
 // End of user code
+// spotless:on
 
 // Start of user code pre_class_code
 // End of user code

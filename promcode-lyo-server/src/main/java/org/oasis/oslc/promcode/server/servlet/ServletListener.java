@@ -17,6 +17,7 @@
 
 package org.oasis.oslc.promcode.server.servlet;
 
+// spotless:off
 import java.net.MalformedURLException;
 import java.util.NoSuchElementException;
 import java.util.Locale;
@@ -36,6 +37,7 @@ import org.oasis.oslc.promcode.server.RestDelegate;
 
 // Start of user code imports
 // End of user code
+// spotless:on
 
 /**
  * During the initialization of this ServletListener, the base URI for the OSLC resources produced by this server is configured through the OSLC4J method setPublicURI().
