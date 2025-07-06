@@ -51,7 +51,7 @@ Pre-built Docker images are available from GitHub Container Registry for both x8
 docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:latest
 
 # Run a specific version
-docker run -p 8080:8080 ghcr.io/YOUR_ORG/promcode-lyo-server:0.1.0
+docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:0.1.0
 ```
 
 > **Note:** Images are automatically rebuilt weekly to ensure the latest security updates from base images.
