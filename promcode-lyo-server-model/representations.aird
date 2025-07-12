@@ -6,7 +6,7 @@
     <semanticResources>platform:/resource/org.eclipse.lyo.tools.domainmodels/vocabulary.xml</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_YmYJsFSnEe6An__qA50aTA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_YrZzoVSnEe6An__qA50aTA" name="ToolchainDiagram" repPath="#_YmmMIFSnEe6An__qA50aTA" changeId="ac9b5333-3883-411e-b4de-ad5112046a79">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_YrZzoVSnEe6An__qA50aTA" name="PromcodeToolchain" repPath="#_YmmMIFSnEe6An__qA50aTA" changeId="ac9b5333-3883-411e-b4de-ad5112046a79">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.lyo.tools.toolchain.design/description/ToolChainModel.odesign#//@ownedViewpoints[name='ToolchainViewpoint']/@ownedRepresentations[name='ToolchainDiagram']"/>
         <target xmi:type="oslc4j_tc:Toolchain" href="toolchainModel.xml#/"/>
       </ownedRepresentationDescriptors>

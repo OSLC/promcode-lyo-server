@@ -113,15 +113,6 @@ public class ArtifactService
         super();
     }
 
-    private void addCORSHeaders (final HttpServletResponse httpServletResponse) {
-        //UI preview can be blocked by CORS policy.
-        //add select CORS headers to every response that is embedded in an iframe.
-        httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
-        httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD");
-        httpServletResponse.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-        httpServletResponse.addHeader("Access-Control-Allow-Credentials", "true");
-    }
-
     @GET
     @Path("{id}")
     @Produces({OslcMediaType.APPLICATION_RDF_XML, OslcMediaType.APPLICATION_JSON_LD, OslcMediaType.TEXT_TURTLE, OslcMediaType.APPLICATION_XML, OslcMediaType.APPLICATION_JSON})
@@ -253,7 +244,6 @@ public class ArtifactService
             compact.setLargePreview(largePreview);
 
             httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
-            addCORSHeaders(httpServletResponse);
             return compact;
         }
         throw new WebApplicationException(Status.NOT_FOUND);
@@ -290,7 +280,6 @@ public class ArtifactService
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/uipreview.jsp");
             httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
-            addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
         }
@@ -329,7 +318,6 @@ public class ArtifactService
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/uipreview.jsp");
             httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
-            addCORSHeaders(httpServletResponse);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
         }
