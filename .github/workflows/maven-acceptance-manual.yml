@@ -43,7 +43,7 @@ jobs:
           distribution:  ${{ matrix.distribution }}
           java-version: ${{ matrix.java-version }}
       - name: 'Maven build (Lyo)'
-        run: mvn -B clean install --file lyo-trunk/pom.xml -DskipTests -Dmaven.javadoc.skip=true -P '!spotless'
+        run: mvn -B clean install --file lyo-trunk/pom.xml -DskipTests -Dmaven.javadoc.skip=true -P '!spotless' -P'!spotbugs'
       - name: 'Maven build (project)'
         run: |
           mvn -B clean verify --file main/promcode-lyo-server/pom.xml
