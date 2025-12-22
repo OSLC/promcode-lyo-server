@@ -1,4 +1,4 @@
-name: Acceptance testing (Lyo HEAD)
+name: Smoke testing (Lyo HEAD)
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
         description: 'Lyo branch to test on'
         required: true
         default: 'master'
+      lyoRepo:
+        description: 'Lyo repository or fork'
+        required: true
+        default: 'eclipse/lyo'
       link:
         description: 'PR/issue link (e.g., to Lyo)'
 
