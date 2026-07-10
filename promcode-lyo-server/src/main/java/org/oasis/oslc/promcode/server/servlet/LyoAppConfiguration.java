@@ -19,5 +19,5 @@ package org.oasis.oslc.promcode.server.servlet;
 
 import java.util.Set;
 
-public record LyoGeneratedAppConfig(String baseUrl, String servletPath, Set<String> corsFriends) {
+public record LyoAppConfiguration(String baseUrl, String servletPath, Set<String> corsFriends) {
 }
