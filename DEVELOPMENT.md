@@ -5,16 +5,19 @@ A sample **OSLC PROMCODE 1.0** server, modelled and generated with
 The single Maven module is `promcode-lyo-server/` (a WAR).
 
 ## Prerequisites
-- JDK 11
-- Maven 3
+- JDK 21 (25 recommended)
+- Maven 3.9
 - (Optional) Docker / Docker Compose, for running the server and its Fuseki store
 
 ## Building
+
     cd promcode-lyo-server
     mvn test
+
 The module currently has **no automated tests**; `mvn test` is a compile check.
 
 ## Running the server
+
 The server needs an RDF store (Apache Jena Fuseki). See `README.md` for the full
 Fuseki setup. Quick options:
 
