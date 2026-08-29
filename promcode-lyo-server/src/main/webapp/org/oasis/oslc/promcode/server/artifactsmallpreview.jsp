@@ -63,7 +63,7 @@
     <% Method method = null; %>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getIsPartOf"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="isPartOf"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if ((aArtifact.getIsPartOf() == null) || (aArtifact.getIsPartOf().getValue() == null)) {
@@ -82,7 +82,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getProducedFor"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="producedFor"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <ul>
         <%
@@ -97,7 +97,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getTargets"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="targets"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <ul>
         <%
@@ -122,7 +122,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getDescription"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aArtifact.getDescription() == null) {
@@ -137,7 +137,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getIdentifier"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title=""><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aArtifact.getIdentifier() == null) {
@@ -152,7 +152,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getSource"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="source"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aArtifact.getSource() == null) {
@@ -167,7 +167,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getTitle"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="title"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aArtifact.getTitle() == null) {
@@ -182,7 +182,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Artifact.class.getMethod("getSequenceNumber"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="sequenceNumber"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aArtifact.getSequenceNumber() == null) {
@@ -208,7 +208,7 @@ if (!extendedProperties.isEmpty()) {
         Object value = entry.getValue();
     %>
     <dl class="row">
-        <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>"><%=key.getLocalPart()%></a></dt>
+        <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="<%=key.getLocalPart()%>"><%=key.getLocalPart()%></a></dt>
         <dd class="col-sm-9"><%= value.toString()%></dd>
     </dl>
     <%

@@ -102,7 +102,7 @@
           <% Method method = null; %>
           <dl class="row">
             <% method = Artifact.class.getMethod("getIsPartOf"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="isPartOf"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if ((aArtifact.getIsPartOf() == null) || (aArtifact.getIsPartOf().getValue() == null)) {
@@ -121,7 +121,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getProducedFor"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="producedFor"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <ul>
             <%
@@ -136,7 +136,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getTargets"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="targets"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <ul>
             <%
@@ -161,7 +161,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getDescription"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if (aArtifact.getDescription() == null) {
@@ -176,7 +176,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getIdentifier"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title=""><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if (aArtifact.getIdentifier() == null) {
@@ -191,7 +191,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getSource"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="source"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if (aArtifact.getSource() == null) {
@@ -206,7 +206,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getTitle"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="title"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if (aArtifact.getTitle() == null) {
@@ -221,7 +221,7 @@
           </dl>
           <dl class="row">
             <% method = Artifact.class.getMethod("getSequenceNumber"); %>
-            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+            <dt  class="col-sm-2 text-end"><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="sequenceNumber"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
             <dd class="col-sm-9">
             <%
             if (aArtifact.getSequenceNumber() == null) {
@@ -248,7 +248,7 @@
                 Object value = entry.getValue();
             %>
             <dl class="row">
-                <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>"><%=key.getLocalPart()%></a></dt>
+                <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="<%=key.getLocalPart()%>"><%=key.getLocalPart()%></a></dt>
                 <dd class="col-sm-9"><%= value.toString()%></dd>
             </dl>
             <%

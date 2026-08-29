@@ -63,7 +63,7 @@
     <% Method method = null; %>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getDescription"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getDescription() == null) {
@@ -78,7 +78,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getIdentifier"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title=""><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getIdentifier() == null) {
@@ -93,7 +93,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getSource"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="source"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getSource() == null) {
@@ -108,7 +108,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getTitle"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="title"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getTitle() == null) {
@@ -123,7 +123,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getActualEndDate"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="actualEndDate"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getActualEndDate() == null) {
@@ -138,7 +138,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getActualStartDate"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="actualStartDate"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getActualStartDate() == null) {
@@ -153,7 +153,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getMetricOfScopeItemSize"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="metricOfScopeItemSize"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if ((aProject.getMetricOfScopeItemSize() == null) || (aProject.getMetricOfScopeItemSize().getValue() == null)) {
@@ -168,7 +168,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getPlannedEndDate"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="plannedEndDate"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getPlannedEndDate() == null) {
@@ -183,7 +183,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getPlannedStartDate"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="plannedStartDate"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if (aProject.getPlannedStartDate() == null) {
@@ -198,7 +198,7 @@
     </dl>
     <dl class="dl-horizontal">
         <% method = Project.class.getMethod("getUnitOfScopeItemSize"); %>
-        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
+        <dt><a href="<%=method.getAnnotation(OslcPropertyDefinition.class).value() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="unitOfScopeItemSize"><%=method.getAnnotation(OslcName.class).value()%></a></dt>
         <dd>
         <%
         if ((aProject.getUnitOfScopeItemSize() == null) || (aProject.getUnitOfScopeItemSize().getValue() == null)) {
@@ -224,7 +224,7 @@ if (!extendedProperties.isEmpty()) {
         Object value = entry.getValue();
     %>
     <dl class="row">
-        <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>"><%=key.getLocalPart()%></a></dt>
+        <dt  class="col-sm-2 text-end"><a href="<%=key.getNamespaceURI() + key.getLocalPart() %>" style="text-decoration-style: dashed;" target="_blank" rel="noopener noreferrer" title="<%=key.getLocalPart()%>"><%=key.getLocalPart()%></a></dt>
         <dd class="col-sm-9"><%= value.toString()%></dd>
     </dl>
     <%
