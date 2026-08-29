@@ -113,7 +113,7 @@ public class ServiceProvidersFactory
             new PrefixDefinition(OslcConstants.OSLC_DATA_NAMESPACE_PREFIX, new URI(OslcConstants.OSLC_DATA_NAMESPACE)),
             new PrefixDefinition(OslcConstants.RDF_NAMESPACE_PREFIX, new URI(OslcConstants.RDF_NAMESPACE)),
             new PrefixDefinition(OslcConstants.RDFS_NAMESPACE_PREFIX, new URI(OslcConstants.RDFS_NAMESPACE)),
-            new PrefixDefinition(Oslc_promcodeDomainConstants.PROMCODE_NAMSPACE_PREFIX, new URI(Oslc_promcodeDomainConstants.PROMCODE_NAMSPACE))
+            new PrefixDefinition(Oslc_promcodeDomainConstants.PROMCODE_NAMSPACE_PREFIX, new URI(Oslc_promcodeDomainConstants.PROMCODE_NAMSPACE))        
         };
         serviceProvider.setPrefixDefinitions(prefixDefinitions);
 

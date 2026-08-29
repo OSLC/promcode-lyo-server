@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -142,30 +140,55 @@ public class ServiceProviderService1
         // End of user code
 
         httpServletRequest.setAttribute("selectionUri",UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(uriInfo.getPath()).build().toString());
+        httpServletResponse.setHeader("Vary", "HX-Request");
         // Start of user code ArtifactSelector_setAttributes
+        if (terms != null) {
+            try {
+                java.util.regex.Pattern.compile(terms, java.util.regex.Pattern.CASE_INSENSITIVE);
+            } catch (java.util.regex.PatternSyntaxException e) {
+                final String selectorError = "Bad query syntax - must be a valid POSIX regex.";
+                if ("true".equalsIgnoreCase(httpServletRequest.getHeader("HX-Request"))) {
+                    httpServletRequest.setAttribute("selectorError", selectorError);
+                    RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/artifactselector-results.jsp");
+                    rd.forward(httpServletRequest, httpServletResponse);
+                    return null;
+                }
+                return Response.status(Status.BAD_REQUEST)
+                        .entity(selectorError)
+                        .type(MediaType.TEXT_PLAIN)
+                        .build();
+            }
+        }
         // End of user code
 
-        if (terms != null ) {
+        if (terms != null) {
             httpServletRequest.setAttribute("terms", terms);
             final List<Artifact> resources = delegate.ArtifactSelector(httpServletRequest, terms);
-            if (resources!= null) {
-                JSONArray resourceArray = new JSONArray();
-                for (Artifact resource : resources) {
-                    JSONObject r = new JSONObject();
-                    r.put("oslc:label", resource.toString());
-                    r.put("rdf:resource", resource.getAbout().toString());
-                    r.put("Label", resource.toString());
-                    // Start of user code ArtifactSelector_setResponse
+            if (resources != null) {
+                if ("true".equalsIgnoreCase(httpServletRequest.getHeader("HX-Request"))) {
+                    httpServletRequest.setAttribute("resources", resources);
+                    RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/artifactselector-results.jsp");
+                    rd.forward(httpServletRequest, httpServletResponse);
+                    return null;
+                } else {
+                    JSONArray resourceArray = new JSONArray();
+                    for (Artifact resource : resources) {
+                        JSONObject r = new JSONObject();
+                        r.put("oslc:label", resource.toString());
+                        r.put("rdf:resource", resource.getAbout().toString());
+                        r.put("Label", resource.toString());
+                        // Start of user code ArtifactSelector_setResponse
                     //TODO: Add any other attributes that are to be displayed in the search result
                     // End of user code
-                    resourceArray.add(r);
+                        resourceArray.add(r);
+                    }
+                    JSONObject response = new JSONObject();
+                    response.put("oslc:results", resourceArray);
+                    return Response.ok(response.write()).build();
                 }
-                JSONObject response = new JSONObject();
-                response.put("oslc:results", resourceArray);
-                return Response.ok(response.write()).build();
             }
             log.error("A empty search should return an empty list and not NULL!");
-            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+            return Response.noContent().build();
 
         } else {
             httpServletRequest.setAttribute("resourceTypeLabel", "Artifact");
@@ -173,7 +196,7 @@ public class ServiceProviderService1
             // Start of user code ArtifactSelector_setAttribute_fieldsToList
             //TODO: set the attribute "fieldsToList" to form the list of properties you want displayed in the search result
             // End of user code
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/selectiondialog.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/artifactselector.jsp");
             rd.forward(httpServletRequest, httpServletResponse);
             return null;
         }
