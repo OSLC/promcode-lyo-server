@@ -35,7 +35,7 @@ jobs:
           - java-version: '25'
             distribution: 'liberica'
           - java-version: '27'
-            distribution: 'temurin'
+            distribution: 'liberica'
     steps:
       - uses: actions/checkout@v6
         with:

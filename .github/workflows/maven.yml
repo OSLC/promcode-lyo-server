@@ -31,7 +31,7 @@ jobs:
             distribution: 'temurin'
             experimental: false
           - jdk: '27'
-            distribution: 'temurin'
+            distribution: 'liberica'
             experimental: false
           # - jdk: '25-ea'
           #   distribution: 'zulu'
