@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -85,7 +83,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import org.eclipse.lyo.server.ui.model.PreviewFactory;
 // Start of user code imports
 // End of user code
 // spotless:on
@@ -179,10 +176,7 @@ public class ProjectService
             // Start of user code getProjectAsHtml_setAttributes
             // End of user code
 
-            httpServletRequest.setAttribute("aResource", aProject);
-            httpServletRequest.setAttribute("resourceTypeName", Oslc_promcodeDomainConstants.PROJECT_LOCALNAME);
-            httpServletRequest.setAttribute("shapeUri", UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(OslcConstants.PATH_RESOURCE_SHAPES).path(Oslc_promcodeDomainConstants.PROJECT_PATH).build());
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/viewresource.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/project.jsp");
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
@@ -266,19 +260,7 @@ public class ProjectService
             // Start of user code getProjectAsHtmlSmallPreview_setAttributes
             // End of user code
 
-            try {
-                httpServletRequest.setAttribute("resourceTitle", aProject.toString());
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getDescription", "getIdentifier", "getSource", "getTitle", "getActualEndDate", "getActualStartDate", "getMetricOfScopeItemSize", "getPlannedEndDate", "getPlannedStartDate", "getUnitOfScopeItemSize"));
-                // Start of user code getProjectAsHtmlSmallPreview_setResourceGetterMethods
-                //TODO: modify the set of attributes to show in the preview
-                // End of user code
-                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aProject, getterMethodNames, false);
-                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
-            } catch (Exception e) {
-                log.error("Could not handle smallPreview", e);
-                throw new WebApplicationException("Could not handle smallPreview", e);
-            }
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/uipreview.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/projectsmallpreview.jsp");
             httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
@@ -304,19 +286,7 @@ public class ProjectService
             // Start of user code getProjectAsHtmlLargePreview_setAttributes
             // End of user code
 
-            try {
-                httpServletRequest.setAttribute("resourceTitle", aProject.toString());
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getDescription", "getIdentifier", "getSource", "getTitle", "getActualEndDate", "getActualStartDate", "getMetricOfScopeItemSize", "getPlannedEndDate", "getPlannedStartDate", "getUnitOfScopeItemSize"));
-                // Start of user code getProjectAsHtmlLargePreview_setResourceGetterMethods
-                //TODO: modify the set of attributes to show in the preview
-                // End of user code
-                String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aProject, getterMethodNames, true);
-                httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
-            } catch (Exception e) {
-                log.error("Could not handle largePreview", e);
-                throw new WebApplicationException("Could not handle largePreview", e);
-            }
-            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/uipreview.jsp");
+            RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/org/oasis/oslc/promcode/server/projectlargepreview.jsp");
             httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
             rd.forward(httpServletRequest, httpServletResponse);
             return;
