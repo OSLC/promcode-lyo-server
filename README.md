@@ -31,7 +31,7 @@ The easiest way to run both the PROMCODE server and Fuseki together:
    With Podman, use `podman compose up --build`. The legacy `docker-compose` commands also work when that executable is installed.
 3. This will start both services:
    - Fuseki server at http://localhost:3030 (admin/admin)
-   - PROMCODE server at http://localhost:8080/promcode-server
+   - PROMCODE server at http://localhost:8080/
 
 Compose uses Fuseki dataset `/ds` and persists it in the `fuseki-data` volume.
 The standalone Fuseki examples below use `/dataset`, matching the source build's `store.properties`. Set `LYO_STORE_SPARQL_QUERY_ENDPOINT` and
@@ -130,7 +130,7 @@ This will:
 
 The OSLC server is available at the following URL:
 
-- http://localhost:8080/promcode-server/
+- http://localhost:8080/
 
 From that point, you can navigate through the Service Provider Catalog, or using the built-in Swagger Editor.
 
@@ -151,7 +151,7 @@ curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
    dcterms:description "UI for making a reservation" .' \
 -H "Accept: text/turtle;" \
 -H "Content-type: text/turtle" \
-http://localhost:8080/promcode-server/oslc/service1/artifacts/create
+http://localhost:8080/oslc/service1/artifacts/create
 ```
 
 **PowerShell/Windows:**
@@ -164,12 +164,12 @@ curl.exe -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
    dcterms:description "UI for making a reservation" .' `
 -H "Accept: text/turtle;" `
 -H "Content-type: text/turtle" `
-http://localhost:8080/promcode-server/oslc/service1/artifacts/create
+http://localhost:8080/oslc/service1/artifacts/create
 ```
 
 2. To retrieve the created artifact:
    ```bash
-   curl -H "Accept: text/turtle;" http://localhost:8080/promcode-server/oslc/artifact/1
+   curl -H "Accept: text/turtle;" http://localhost:8080/oslc/artifact/1
    ```
 
 

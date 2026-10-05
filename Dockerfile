@@ -24,7 +24,7 @@ LABEL org.opencontainers.image.licenses="EPL-2.0"
 # WARNING DO NOT CHANGE WORKDIR or set it back to what it was before
 # $JETTY_BASE must be correct before starting Jetty
 
-COPY --from=build /src/promcode-lyo-server/target/*.war /var/lib/jetty/webapps/promcode-server.war
+COPY --from=build /src/promcode-lyo-server/target/*.war /var/lib/jetty/webapps/ROOT.war
 
 RUN java -jar "$JETTY_HOME/start.jar" --add-modules=ee10-deploy,ee10-jsp,ee10-jstl
 

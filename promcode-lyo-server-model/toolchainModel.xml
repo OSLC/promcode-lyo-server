@@ -34,7 +34,7 @@
       <persistence store="//@adaptorInterfaces.0/@stores.0"/>
     </webServices>
     <specification/>
-    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8080/" applicationContextPath="/promcode-server" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8080">
+    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8080/" applicationContextPath="/" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8080">
       <generalConfiguration doNotGenerateFromImportedModels="true" filesBasePath="." javaBasePackageName="org.oasis.oslc.promcode.server"/>
       <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="7.0.0-SNAPSHOT" groupId="org.oasis.oslc.promcode.server" artifactId="promcode-server" version="0.1.2-SNAPSHOT"/>
     </configuration>

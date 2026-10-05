@@ -35,6 +35,7 @@ Its default is `eclipse-lyo/lyo`, branch `main`.
 See [README startup instructions](README.md#running-the-oslc-promcode-server)
 for Fuseki setup and server launch commands. Compose builds the root Dockerfile;
 the publication workflow pushes the same server image to GHCR for amd64 and arm64.
+Jetty, Tomcat and the container deploy at `/`; OSLC routes are under `/oslc/`.
 
 Logging uses SLF4J with `src/main/resources/logback.xml`. Set package log levels
 there when diagnosing requests. Store connection defaults live in

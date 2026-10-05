@@ -20,7 +20,7 @@
         <version.lyo>7.0.0-SNAPSHOT</version.lyo>
         <swagger-ui.version>5.32.8</swagger-ui.version>
         <servlet.port>8080</servlet.port>
-        <application.contextpath>/promcode-server</application.contextpath>
+        <application.contextpath>/</application.contextpath>
         <application.filename>promcode-server</application.filename>
 
         <!-- Start of user code properties

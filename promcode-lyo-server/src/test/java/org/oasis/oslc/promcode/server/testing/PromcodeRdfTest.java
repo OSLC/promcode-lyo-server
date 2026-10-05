@@ -11,8 +11,7 @@ import org.oasis.oslc.promcode.server.ResourcesFactory;
 class PromcodeRdfTest {
   @Test
   void artifactRoundTripPreservesPromcodeTypeAndProperties() throws Exception {
-    Artifact artifact =
-        new ResourcesFactory("http://example.test/promcode-server/oslc/").createArtifact("1");
+    Artifact artifact = new ResourcesFactory("http://example.test/oslc/").createArtifact("1");
     artifact.setIdentifier("1");
     artifact.setTitle("A1");
     artifact.setDescription("UI for making a reservation");
@@ -26,7 +25,7 @@ class PromcodeRdfTest {
         """
         @prefix dcterms: <http://purl.org/dc/terms/> .
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-        <http://example.test/promcode-server/oslc/artifact/1>
+        <http://example.test/oslc/artifact/1>
           a <http://open-services.net/ns/promcode#Artifact>;
           dcterms:identifier "1"; dcterms:title "A1"^^rdf:XMLLiteral;
           dcterms:description "UI for making a reservation"^^rdf:XMLLiteral .
@@ -44,9 +43,9 @@ class PromcodeRdfTest {
 
   @Test
   void artifactIdentifierIsEncodedAsOnePathSegment() {
-    ResourcesFactory factory = new ResourcesFactory("http://example.test/promcode-server/oslc/");
+    ResourcesFactory factory = new ResourcesFactory("http://example.test/oslc/");
     assertEquals(
-        URI.create("http://example.test/promcode-server/oslc/artifact/A%2FB%20C"),
+        URI.create("http://example.test/oslc/artifact/A%2FB%20C"),
         factory.constructURIForArtifact("A/B C"));
   }
 }
