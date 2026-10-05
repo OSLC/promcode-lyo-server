@@ -1,57 +1,31 @@
 name: CI
-
 on:
   merge_group:
+    types: [checks_requested]
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
   schedule:
-    - cron: "19 4 * * 4" # catch SNAPSHOT breaking changes
+    - cron: "19 4 * * 4"
   workflow_dispatch:
-
+permissions:
+  contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/main' }}
-
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # jdk: ['17', '21']
-        # distribution: ['temurin']
-        # experimental: [false]
-        include:
-          - jdk: '21'
-            distribution: 'temurin'
-            experimental: false
-          - jdk: '25'
-            distribution: 'temurin'
-            experimental: false
-          - jdk: '27'
-            distribution: 'liberica'
-            experimental: false
-          # - jdk: '25-ea'
-          #   distribution: 'zulu'
-          #   experimental: true
-    continue-on-error: ${{ matrix.experimental }}
-
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK ${{ matrix.jdk }}
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          distribution: ${{ matrix.distribution }}
-          java-version: ${{ matrix.jdk }}
-      - uses: actions/cache@v4
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: 'Maven build'
-        run: |
-          mvn -B clean verify --file ./promcode-lyo-server/pom.xml
+          distribution: temurin
+          java-version: '25'
+      - name: Maven verify
+        run: mvn -B --no-transfer-progress clean verify -Dselfie=readonly --file promcode-lyo-server/pom.xml

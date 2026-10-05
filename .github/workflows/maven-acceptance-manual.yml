@@ -1,57 +1,44 @@
 name: Acceptance test (Lyo HEAD)
-run-name: "acceptance@${{ github.ref_name }} (Lyo@${{ github.event.inputs.lyoBranch }}; comment: ${{ inputs.comment }})"
-
-
+run-name: "acceptance@${{ github.ref_name }} (Lyo@${{ inputs.lyoBranch }}; ${{ inputs.link }})"
 on:
   workflow_dispatch:
     inputs:
       lyoBranch:
-        description: 'Lyo branch to test on'
+        description: Lyo branch to test on
         required: true
-        default: 'master'
+        default: main
       lyoRepo:
-        description: 'Lyo repository or fork'
+        description: Lyo repository or fork
         required: true
-        default: 'eclipse/lyo'
+        default: eclipse-lyo/lyo
       link:
-        description: 'PR/issue link (e.g., to Lyo)'
-
+        description: PR/issue link
+permissions:
+  contents: read
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.lyoRepo }}-${{ github.event.inputs.lyoBranch }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/main' }}
-
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.lyoRepo }}-${{ inputs.lyoBranch }}
+  cancel-in-progress: true
 jobs:
-  build-jdk17:
+  build:
+    name: Lyo HEAD compatibility
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-#         java-version: [17]
-# #        distribution: ['temurin', 'zulu', 'oracle', 'corretto', 'microsoft', 'liberica']
-#         distribution: ['temurin']
-        include:
-          - java-version: '21'
-            distribution: 'temurin'
-          - java-version: '25'
-            distribution: 'liberica'
-          - java-version: '27'
-            distribution: 'liberica'
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          repository: "${{ github.event.inputs.lyoRepo }}"
-          ref: "${{ github.event.inputs.lyoBranch }}"
+          repository: ${{ inputs.lyoRepo }}
+          ref: ${{ inputs.lyoBranch }}
           path: lyo-trunk
-      - uses: actions/checkout@v6
+          persist-credentials: false
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           path: main
-      - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v4
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
-          distribution:  ${{ matrix.distribution }}
-          java-version: ${{ matrix.java-version }}
-      - name: 'Maven build (Lyo)'
-        run: mvn -B clean install --file lyo-trunk/pom.xml -DskipTests -Dmaven.javadoc.skip=true -P '!spotless' -P'!spotbugs'
-      - name: 'Maven build (project)'
-        run: |
-          mvn -B clean verify --file main/promcode-lyo-server/pom.xml
+          distribution: temurin
+          java-version: '25'
+      - name: Maven build (Lyo)
+        run: mvn -B --no-transfer-progress clean install --file lyo-trunk/pom.xml -DskipTests -Dmaven.javadoc.skip=true -P '!spotless,!spotbugs'
+      - name: Maven verify (project)
+        run: mvn -B --no-transfer-progress clean verify -Dselfie=readonly --file main/promcode-lyo-server/pom.xml

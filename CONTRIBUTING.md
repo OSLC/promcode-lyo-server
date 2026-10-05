@@ -9,9 +9,12 @@ This server is generated from a Lyo Designer model (`promcode-lyo-server-model`)
 Prefer making model changes in Lyo Designer to preserve traceability between the
 model and the generated code.
 
+Edit generated Java only inside its user-code guards; change the model when
+changing generated resource types, services, or routing.
+
 ## Before you submit
 
-- `mvn test` should build the module (it has no automated tests yet).
+- `mvn clean verify -Dselfie=readonly` must pass in `promcode-lyo-server/`.
 - Keep `DEVELOPMENT.md` and `AGENTS.md` in sync when the build/test setup changes.
 - Keep CI configuration and `DEVELOPMENT.md` in sync for any significant changes.
 

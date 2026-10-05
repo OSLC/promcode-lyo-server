@@ -1,23 +1,19 @@
-version: '3.8'
-
 services:
   fuseki:
-    image: secoresearch/fuseki:latest
-    container_name: promcode-fuseki
+    image: docker.io/secoresearch/fuseki:latest
     ports:
-      - "127.0.0.1:3030:3030"
+      - "127.0.0.1:${FUSEKI_PORT:-3030}:3030"
     environment:
       - ADMIN_PASSWORD=admin
-      - FUSEKI_DATASET_1=dataset
       - ENABLE_UPDATE=true
     volumes:
-      - fuseki-data:/fuseki-data
+      - fuseki-data:/fuseki-base/databases
     networks:
       - promcode-network
 
   promcode-server:
+    image: ghcr.io/oslc/promcode-lyo-server:latest
     build: .
-    container_name: promcode-server
     ports:
       - "127.0.0.1:8080:8080"
     depends_on:
