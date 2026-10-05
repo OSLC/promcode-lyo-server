@@ -72,6 +72,7 @@ jobs:
         uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
@@ -80,6 +81,23 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
+          cache-from: type=gha,scope=promcode-server
+          cache-to: type=gha,mode=max,scope=promcode-server
           # For scheduled builds, don't use cache to ensure fresh base images
           no-cache: ${{ github.event_name == 'schedule' }}
           pull: true
+
+      - name: Output image details
+        env:
+          IMAGE_TAGS: ${{ steps.meta.outputs.tags }}
+          IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          printf 'Updated image tags:\n'
+          printf '### Updated image tags\n\n' >> "$GITHUB_STEP_SUMMARY"
+          while IFS= read -r tag; do
+            [ -n "$tag" ] || continue
+            printf '  - %s\n' "$tag"
+            printf -- '- `%s`\n' "$tag" >> "$GITHUB_STEP_SUMMARY"
+          done <<< "$IMAGE_TAGS"
+          printf 'Digest: %s\n' "$IMAGE_DIGEST"
+          printf '\nDigest: `%s`\n' "$IMAGE_DIGEST" >> "$GITHUB_STEP_SUMMARY"
