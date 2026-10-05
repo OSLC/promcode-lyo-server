@@ -1,8 +1,8 @@
 # AGENTS.md — OSLC PROMCODE Server
 
-Follow human-facing docs: `DEVELOPMENT.md` (build/run) and `CONTRIBUTING.md` (rules).
+Follow [DEVELOPMENT.md](DEVELOPMENT.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Agent-specific notes:
-
-- `promcode-server` has **no automated tests**; `mvn test` is a compile check only.
-
+- Run `mvn test -Dselfie=readonly` in `promcode-lyo-server/` for the default check.
+- Preserve Lyo Designer user-code guards; do not rewrite generated Java outside them.
+- Prefer Java text blocks for multiline RDF payloads.
+- Run container smoke checks only when Docker or Podman is available.

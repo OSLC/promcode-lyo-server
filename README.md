@@ -7,30 +7,38 @@ This is a sample OSLC PROMCODE server, that is based on the [OASIS OSLC PROMCODE
 
 ## Running the OSLC PROMCODE server
 
-Follow the 3 sections below to:
+Follow the sections below to:
 
 1. [Setup persistent store](#setup-persistent-store)
 1. [Run the OSLC Server](#run-the-oslc-server)
 1. [Navigate the OSLC server](#navigate-to-oslc-server)
 1. [Populate the OSLC server](#populate-the-oslc-server)
 
-### Setup persistent store 
+### Setup persistent store
 
-You will set up an RDF data store to store the OSLC PROMCODE resources. 
+You will set up an RDF data store to store the OSLC PROMCODE resources.
 
 We will utilize the Apache Jena Fuseki that is an open source RDF server. You can select either Docker Compose, Docker version, or Java version.
 
 #### Docker Compose (Recommended)
 The easiest way to run both the PROMCODE server and Fuseki together:
 
-1. Make sure you have Docker and Docker Compose installed
+1. Make sure you have Docker Compose or Podman Compose installed
 2. Run the following command from the repository root:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
+   With Podman, use `podman compose up --build`. The legacy `docker-compose` commands also work when that executable is installed.
 3. This will start both services:
    - Fuseki server at http://localhost:3030 (admin/admin)
    - PROMCODE server at http://localhost:8080/promcode-server
+
+Compose uses Fuseki dataset `/ds` and persists it in the `fuseki-data` volume.
+The standalone Fuseki examples below use `/dataset`, matching the source build's `store.properties`. Set `LYO_STORE_SPARQL_QUERY_ENDPOINT` and
+`LYO_STORE_SPARQL_UPDATE_ENDPOINT` when using a different dataset.
+
+Set `FUSEKI_PORT` to change Fuseki's host port (default: 3030). The services still
+communicate using their internal container ports.
 
 To stop the services:
 ```bash
@@ -48,13 +56,18 @@ Pre-built Docker images are available from GitHub Container Registry for both x8
 
 ```bash
 # Run the latest version
-docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:latest
+docker run -p 8080:8080 --add-host=host.docker.internal:host-gateway \
+  -e LYO_STORE_SPARQL_QUERY_ENDPOINT=http://host.docker.internal:3030/dataset/sparql \
+  -e LYO_STORE_SPARQL_UPDATE_ENDPOINT=http://host.docker.internal:3030/dataset/update \
+  ghcr.io/oslc/promcode-lyo-server:latest
 
-# Run a specific version
-docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:0.1.0
+# To select a published version, replace :latest with its version tag.
 ```
 
 > **Note:** Images are automatically rebuilt weekly to ensure the latest security updates from base images.
+
+This command connects to a Fuseki `/dataset` on the host. Use `/ds` instead when
+connecting to the Compose Fuseki service through its published host port.
 
 #### Docker version
 
@@ -64,7 +77,7 @@ docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:0.1.0
 
 #### Java version
 
-1. Download jar file from https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-server/ 
+1. Download jar file from https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-server/
 2. For the latest Java version, run the following command
    - `java -cp jena-fuseki-server-4.2.0.jar org.apache.jena.fuseki.main.cmds.FusekiMainCmd --update --mem /dataset`
 3. For Java 1.8 , run the following command
@@ -75,8 +88,8 @@ docker run -p 8080:8080 ghcr.io/oslc/promcode-lyo-server:0.1.0
 There are multiple options to run the OSLC Server.
 Below are the simplest options if you don't want to use anything except JDK and a Maven installation. Prerequisites:
 
-- JDK 11
-- Maven 3
+- JDK 25
+- Maven 3.9 or newer
 
 #### Using built-in servers directly
 
@@ -95,7 +108,7 @@ Follow these steps to start the server:
 
 ```sh
 cd promcode-lyo-server
-mvn clean cargo:run
+mvn clean package cargo:run -Pwith-jstl-impl
 ```
 
 #### Using Docker Compose
@@ -123,10 +136,10 @@ From that point, you can navigate through the Service Provider Catalog, or using
 
 ### Populate the OSLC server
 
-THe server contains no data at startup. 
+The server contains no data at startup.
 You can add resources to the server by performing resource operations on their creation factories.
 
-This can be done through the built-in Swagger editor, or using the command line. 
+This can be done through the built-in Swagger editor, or using the command line.
 
 **Bash/Linux/macOS:**
 ```bash
@@ -138,12 +151,12 @@ curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
    dcterms:description "UI for making a reservation" .' \
 -H "Accept: text/turtle;" \
 -H "Content-type: text/turtle" \
-http://localhost:8080/oslc/service1/artifacts/create
+http://localhost:8080/promcode-server/oslc/service1/artifacts/create
 ```
 
 **PowerShell/Windows:**
 ```powershell
-curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
+curl.exe -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix oslc_promcode: <http://open-services.net/ns/promcode#> .
 <> a oslc_promcode:Artifact ;
    dcterms:identifier "1" ;
@@ -151,18 +164,18 @@ curl -i --data-raw '@prefix dcterms: <http://purl.org/dc/terms/> .
    dcterms:description "UI for making a reservation" .' `
 -H "Accept: text/turtle;" `
 -H "Content-type: text/turtle" `
-http://localhost:8080/oslc/service1/artifacts/create
+http://localhost:8080/promcode-server/oslc/service1/artifacts/create
 ```
 
 2. To retrieve the created artifact:
    ```bash
-   curl -H "Accept: text/turtle;" http://localhost:8080/oslc/artifact/1
+   curl -H "Accept: text/turtle;" http://localhost:8080/promcode-server/oslc/artifact/1
    ```
 
 
 ## Modifying the OSLC PROMCODE server with Lyo Designer
 
-This server is modelled and generated using [Lyo Designer](https://oslc.github.io/developing-oslc-applications/eclipse_lyo/lyo-designer.html). 
+This server is modelled and generated using [Lyo Designer](https://oslc.github.io/developing-oslc-applications/eclipse_lyo/lyo-designer.html).
 
 It is recommended that any changes to the code should be done using LyoDesigner to maintain traceability between the model and the code. Below are some instructions on how to open the projects in this repository with LyoDesigner.
 
@@ -178,7 +191,7 @@ The first step is to [install Lyo Designer](https://oslc.github.io/developing-os
 
 The PROMCODE domain model is already modelled and made available to be used by any PROMCODE server installation.
 
-1. Import the [Lyo Git repository](https://github.com/eclipse/lyo.git)
+1. Import the [Lyo Git repository](https://github.com/eclipse-lyo/lyo.git)
 1. In LyoDesigner, import the Modelling project under the "domains\org.eclipse.lyo.tools.domainmodels" folder.
 
 This project contains the PROMCODE model, and all other OSLC Domain Specifications.
