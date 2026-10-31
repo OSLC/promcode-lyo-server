@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <version.lyo>7.0.0-SNAPSHOT</version.lyo>
+        <version.lyo>7.0.0.Beta4</version.lyo>
         <swagger-ui.version>5.32.8</swagger-ui.version>
         <servlet.port>8080</servlet.port>
         <application.contextpath>/promcode-server</application.contextpath>
@@ -180,7 +180,6 @@
         <dependency>
             <groupId>org.eclipse.lyo</groupId>
             <artifactId>oslc-domains</artifactId>
-            <version>7.0.0-SNAPSHOT</version>
         </dependency>
         
         <!-- Swagger dependencies -->
