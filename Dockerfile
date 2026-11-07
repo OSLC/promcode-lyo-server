@@ -1,4 +1,4 @@
-FROM docker.io/library/maven:3-eclipse-temurin-21-alpine AS build
+FROM docker.io/library/maven:3-eclipse-temurin-25-alpine AS build
 
 WORKDIR /src
 # Copy pom.xml first for better Docker layer caching
@@ -13,7 +13,7 @@ COPY . .
 # Build the application
 RUN mvn -B --no-transfer-progress -f promcode-lyo-server/pom.xml -DskipTests clean package -am
 
-FROM docker.io/library/jetty:12-jre21-eclipse-temurin
+FROM docker.io/library/jetty:12-jdk25
 
 # Add metadata
 LABEL org.opencontainers.image.title="PROMCODE Server"
