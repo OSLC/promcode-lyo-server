@@ -13,7 +13,7 @@ COPY . .
 # Build the application
 RUN mvn -B --no-transfer-progress -f promcode-lyo-server/pom.xml -DskipTests clean package -am
 
-FROM docker.io/library/jetty:12-jre25-eclipse-temurin
+FROM docker.io/library/jetty:12-jdk25
 
 # Add metadata
 LABEL org.opencontainers.image.title="PROMCODE Server"
